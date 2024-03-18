@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import sys
 
 # Form implementation generated from reading ui file 'mainUI.ui'
 #
@@ -17,7 +18,6 @@ class Ui_MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi()
-        self.retranslateUi()
 
     def setupUi(self):
         self.setObjectName("MainWindow")
@@ -33,13 +33,13 @@ class Ui_MainWindow(QMainWindow):
         self.tabWidget.addTab(self.tab1, "11")
         self.content1 = Ui_Form()
         self.content1.setupUi(self.tab1)
-
-
-        self.tab2 = QtWidgets.QWidget()
-        self.tab2.setObjectName("tab")
-        self.tabWidget.addTab(self.tab2, "22")
-        self.content2 = Ui_Form()
-        self.content2.setupUi(self.tab2)
+        #
+        #
+        # self.tab2 = QtWidgets.QWidget()
+        # self.tab2.setObjectName("tab")
+        # self.tabWidget.addTab(self.tab2, "22")
+        # self.content2 = Ui_Form()
+        # self.content2.setupUi(self.tab2)
 
 
 
@@ -50,10 +50,12 @@ class Ui_MainWindow(QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self):
-        _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        # _translate = QtCore.QCoreApplication.translate
+        # self.setWindowTitle(_translate("MainWindow", "MainWindow"))
         # self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1), _translate("MainWindow", "Tab 1"))
         # self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), _translate("MainWindow", "Tab 2"))
+
+        self.helper1 = TabHelper(self.content1)
 
     def addAction(self):
         #content1
@@ -62,4 +64,12 @@ class Ui_MainWindow(QMainWindow):
 
     def startBtnClicked(self):
         print("adb start capsheet")
-        self.content1.log_edit.append("hia\n")
+        # self.content1.log_edit.append("hia\n")
+
+
+if __name__ == "__main__":
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
+    app = QtWidgets.QApplication(sys.argv)
+    window = Ui_MainWindow()
+    window.show()
+    sys.exit(app.exec_())

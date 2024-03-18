@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-import os.path
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 from ui.mainUI import Ui_MainWindow
 
 
@@ -19,7 +18,7 @@ def checkboxStateCallback(cb):
         print("{} has been unchecked".format(cb.text()))
 
 def checkADBState():
-    pixmap = None  #pixmap 智能加载绝对路径
+    pixmap = None  #pixmap 只能加载绝对路径
     # if ui.shimenCheckbox.isChecked():
     #     p = os.path.dirname(__file__) + "./asset/led_red.png"
     #     pixmap = QtGui.QPixmap(p)
