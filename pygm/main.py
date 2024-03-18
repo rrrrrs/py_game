@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 import sys
-from PyQt5 import QtCore, QtWidgets
-from ui.mainUI import Ui_MainWindow
+from PyQt5 import QtCore, QtGui, QtWidgets
+from views.mainWindow import Ui_MainWindow
 
 
 def startActionCallback():
     print("actionCallback")
-    window.content1.baotuCheckBox.setChecked(True)
-    window.content1.baotuCheckBox.setEnabled(False)
-    window.content1.deviceLabel.setText("device01")
+    # window.content1.baotuCheckBox.setChecked(True)
+    # window.content1.baotuCheckBox.setEnabled(False)
+    # window.content1.deviceLabel.setText("device01")
 
 def checkboxStateCallback(cb):
     checkADBState()

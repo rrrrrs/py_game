@@ -28,6 +28,30 @@ class AdbClient(object):
             # 如果出现错误，返回空列表
             return []
 
+    def screen_swipe(self, device_name, from_x, from_y, to_x, to_y):
+        record = r"adb -s {} shell input swipe {} {} {} {}".format(device_name,from_x, from_y, to_x, to_y)
+        os.system(record)
+
+    def start_guaguale(self, device_name):
+        """
+        刮刮乐
+        :param device_name: adb device name
+        :return: null
+        """
+        # from_x = 800
+        from_y = 450
+        to_x = 1100
+        # to_y = 600
+
+        for i in range(0, 15):
+            from_x = 800 - random.randint(0, 30)
+            from_y = from_y + random.randint(0, 10)
+
+            to_x = to_x + random.randint(0, 30)
+            to_y = from_y + random.randint(0, 10)
+
+            adb.screen_swipe(device_name, from_x, from_y, to_x, to_y)
+
     def screen_shot_and_pull(self, device_name=None, pull_path=None, file_path=None, file_name=None, is_delete=True):
         """
         device_name: 设备名
@@ -96,10 +120,13 @@ class AdbClient(object):
 
     def push_file(self, device_name=None):
         """
-            上传数据到设备
-            """
+        上传数据到设备
+        """
         push = r"adb -s {} push {} {}".format(device_name, self.res, self.dst)
         os.system(push)
+
+    def cmd(self, cmdStr):
+        run(cmdStr, shell=True)
 
 
 if __name__ == '__main__':
@@ -108,6 +135,8 @@ if __name__ == '__main__':
     connected_devices = adb.get_connected_devices()
     print("Connected devices:", connected_devices)
 
-    adb.screen_shot_and_pull(device_name=connected_devices[0], pull_path="C:\\Users\\raosong\\Desktop\\imgs")
-    adb.screen_shot_and_pull(device_name=connected_devices[1], pull_path="C:\\Users\\raosong\\Desktop\\imgs")
+    adb.start_guaguale(connected_devices[0])
+
+    # adb.screen_shot_and_pull(device_name=connected_devices[0], pull_path="C:\\Users\\raosong\\Desktop\\imgs")
+    # adb.screen_shot_and_pull(device_name=connected_devices[1], pull_path="C:\\Users\\raosong\\Desktop\\imgs")
 

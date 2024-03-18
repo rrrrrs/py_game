@@ -9,15 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.Qsci import QsciScintilla
 
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(425, 473)
+        Form.resize(460, 541)
         self.verticalLayoutWidget = QtWidgets.QWidget(Form)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 391, 471))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 461, 541))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.tabContainer_v = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.tabContainer_v.setContentsMargins(4, 4, 4, 4)
@@ -25,12 +24,10 @@ class Ui_Form(object):
         self.deviceContainer = QtWidgets.QHBoxLayout()
         self.deviceContainer.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         self.deviceContainer.setObjectName("deviceContainer")
-        self.deviceLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.deviceLabel.setScaledContents(True)
-        self.deviceLabel.setIndent(1)
-        self.deviceLabel.setOpenExternalLinks(False)
-        self.deviceLabel.setObjectName("deviceLabel")
-        self.deviceContainer.addWidget(self.deviceLabel)
+        self.comboBox = QtWidgets.QComboBox(self.verticalLayoutWidget)
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.deviceContainer.addWidget(self.comboBox)
         self.stateLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.stateLabel.setText("")
         self.stateLabel.setPixmap(QtGui.QPixmap("C:/Users/raosong/Downloads/led_green.png"))
@@ -97,12 +94,9 @@ class Ui_Form(object):
         self.label_4 = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.label_4.setObjectName("label_4")
         self.logcontainer.addWidget(self.label_4)
-        self.log_edit = QsciScintilla(self.verticalLayoutWidget)
-        self.log_edit.setObjectName("plainTextEdit")
-        self.log_edit.setMaximumWidth(300)
-        self.log_edit.setReadOnly(True)  # 设置为只读模式，防止用户修改日志内容
-
-        self.logcontainer.addWidget(self.log_edit)
+        self.plainTextEdit = QtWidgets.QPlainTextEdit(self.verticalLayoutWidget)
+        self.plainTextEdit.setObjectName("plainTextEdit")
+        self.logcontainer.addWidget(self.plainTextEdit)
         self.tabContainer_v.addLayout(self.logcontainer)
         spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.tabContainer_v.addItem(spacerItem3)
@@ -113,7 +107,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.deviceLabel.setText(_translate("Form", "device name"))
+        self.comboBox.setItemText(0, _translate("Form", "none"))
         self.label_3.setText(_translate("Form", "daily"))
         self.shimenCheckbox.setText(_translate("Form", "1"))
         self.baotuCheckBox.setText(_translate("Form", "2"))
@@ -125,26 +119,23 @@ class Ui_Form(object):
         self.duizhangcheckbox.setText(_translate("Form", "captain"))
         self.jieshouzuduicheckBox.setText(_translate("Form", "acceptanyone"))
         self.label_4.setText(_translate("Form", "log"))
-        self.log_edit.append("hia")
-        self.text = """1.我从没觉得孤独，说的浪漫些，我完全自由\n"
-                    "2.夕阳总会落在你身上，你也会快乐一场。\n"
-                    "3.路过全世界，只为走向你。\n"
-                    "4.于千万人中获你惊鸿，从此连生命也愿笑奉。\n"
-                    "5.深情若是一桩悲剧，必定以死来句读\n"
-                    "6.直到遇见你那一刻 我的星河才亮了起来.\n"
-                    "7.简单的喜欢最长远 懂你的人最温柔\n"
-                    "8.希望你的心情能像星星一样， 常年闪闪发亮，偶尔躲躲乌云。\n"
-                    "9.向着月亮出发，即使不能到达，也能站在群星之中。\n"
-                    "10.这份喜欢，迫在眉睫，阁下，你接好。\n"
-                    "11.原来躲起来的星星也在努力发光啊。\n"
-                    "12.也许，大海给贝壳下的定义是珍珠，也许时间给煤炭下的定义是钻石。\n"
-                    "13.我们各自努力，最高处见。\n"
-                    "14.猫咪在落叶里打滚儿，晚霞铺满天空，风把思念吹向你，我贪恋的人间不过是你而已。\n"
-                    "15.你眼中的春和秋，胜过我见过的，爱过的一切山川与河流。\n"
-                    "16.私心是希望你能陪我久一点.\n"
-                    "17.我摘的果子，已酿成酒，只等你来添香解愁。\n"
-                    "18.想用每日的温柔和月亮 换取一束光 最后将它化作星河 万倾赠与你.\n"
-                    "19.风止于秋水，我止于你。\n"
-                    "20.我想要的很简单：兜里有糖，肚里有墨，手里有活，卡里有钱，未来有你。"""
-        self.log_edit.append(self.text)
-
+        self.plainTextEdit.setPlainText(_translate("Form", "1.我从没觉得孤独，说的浪漫些，我完全自由\n"
+"2.夕阳总会落在你身上，你也会快乐一场。\n"
+"3.路过全世界，只为走向你。\n"
+"4.于千万人中获你惊鸿，从此连生命也愿笑奉。\n"
+"5.深情若是一桩悲剧，必定以死来句读\n"
+"6.直到遇见你那一刻 我的星河才亮了起来.\n"
+"7.简单的喜欢最长远 懂你的人最温柔\n"
+"8.希望你的心情能像星星一样， 常年闪闪发亮，偶尔躲躲乌云。\n"
+"9.向着月亮出发，即使不能到达，也能站在群星之中。\n"
+"10.这份喜欢，迫在眉睫，阁下，你接好。\n"
+"11.原来躲起来的星星也在努力发光啊。\n"
+"12.也许，大海给贝壳下的定义是珍珠，也许时间给煤炭下的定义是钻石。\n"
+"13.我们各自努力，最高处见。\n"
+"14.猫咪在落叶里打滚儿，晚霞铺满天空，风把思念吹向你，我贪恋的人间不过是你而已。\n"
+"15.你眼中的春和秋，胜过我见过的，爱过的一切山川与河流。\n"
+"16.私心是希望你能陪我久一点.\n"
+"17.我摘的果子，已酿成酒，只等你来添香解愁。\n"
+"18.想用每日的温柔和月亮 换取一束光 最后将它化作星河 万倾赠与你.\n"
+"19.风止于秋水，我止于你。\n"
+"20.我想要的很简单：兜里有糖，肚里有墨，手里有活，卡里有钱，未来有你。"))

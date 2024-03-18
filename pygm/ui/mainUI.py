@@ -11,7 +11,8 @@ import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from .tab1 import Ui_Form
+from tab1 import Ui_Form
+from helpers.tabHelper import TabHelper
 
 class Ui_MainWindow(QMainWindow):
 
