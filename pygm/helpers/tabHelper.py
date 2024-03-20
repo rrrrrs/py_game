@@ -47,6 +47,7 @@ class TabHelper(object):
     def startBtnClicked(self):
         print("adb start capsheet")
 
+
     def combox_selected(self, i):
         value = self.devices[i]['closed']
         print(value)
@@ -55,9 +56,10 @@ class TabHelper(object):
     def checkADBState(self, is_open):
         pixmap = None  # pixmap 只能加载绝对路径
         if is_open:
-            p = os.path.dirname(__file__) + "/asset/led_red.png"
-            pixmap = QtGui.QPixmap(p)
+            self.widget.stateLabel.setText('开启')
         else:
-            p = os.path.dirname(__file__) + "/asset/led_yellow.png"
-            pixmap = QtGui.QPixmap(p)
-        self.widget.stateLabel.setPixmap(pixmap)
+            # p = os.path.dirname(__file__) + "/asset/led_yellow.png"
+            # pixmap = QtGui.QPixmap(p)
+            self.widget.stateLabel.setText('关闭')
+            # self.widget.stateLabelsetStyleSheet("color:red")
+        # self.widget.stateLabel.setPixmap(pixmap)
