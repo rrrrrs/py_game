@@ -6,7 +6,7 @@ block_cipher = None
 added_files = [('D:/demoRepo/python/test1/ui', 'pyecharts' )]
 
 a = Analysis(['main.py'],
-             pathex=[],
+             pathex=[D:\demoRepo\python\py_game\pygm],
              binaries=[],
              datas=added_files,
              hiddenimports=[],
@@ -27,7 +27,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='main',
+          name='my_s',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,

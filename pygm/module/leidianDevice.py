@@ -22,13 +22,27 @@ def get_all_leidian_devices():
         for line in output.split('\n'):
             if not line.startswith('CreateFile() Error'):
                 fields = line.strip().split(',')
-                if len(fields) >= 3:  # 确保字段数够
-                    data.append({'closed': int(fields[0]), 'name': fields[1], 'hwnd': fields[2]})
+                if len(fields) >= 4:  # 确保字段数够
+                    data.append({'index': int(fields[0]), 'name': fields[1], 'hwnd': int(fields[2]) })
 
         return data
     except subprocess.CalledProcessError:
         # 如果出现错误，返回空列表
         return []
+
+def open_leidian_device(name):
+    """
+    启动雷电模拟器
+    """
+    try:
+        # 运行adb命令并捕获输出
+        cmd_path = get_cmd_path()
+        output = subprocess.check_output([cmd_path, 'launch', '--name', name]).decode()
+        print("启动成功")
+    except subprocess.CalledProcessError:
+        # 如果出现错误，返回空列表
+        return []
+
 
 def shake_leidian_device(hwnd):
     win32gui.SetForegroundWindow(hwnd)
@@ -41,8 +55,8 @@ def shake_leidian_device(hwnd):
 if __name__ == '__main__':
     res = get_all_leidian_devices()
     for device in res:
-        shake_leidian_device(device['hwnd'])
-        if 0 == device['closed']:
+        if 1 == device['isOpen']:
+            shake_leidian_device(device['hwnd'])
             print("device {} is opened".format(device['name']))
         else:
             print("device {} is not opened".format(device['name']))
