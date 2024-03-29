@@ -10,8 +10,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-import common.commonString
-
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -23,19 +21,42 @@ class Ui_Form(object):
         self.tabContainer_v = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.tabContainer_v.setContentsMargins(4, 4, 4, 4)
         self.tabContainer_v.setObjectName("tabContainer_v")
+        self.dailyContainer_4 = QtWidgets.QVBoxLayout()
+        self.dailyContainer_4.setContentsMargins(4, 4, 4, 4)
+        self.dailyContainer_4.setObjectName("dailyContainer_4")
+        self.label_7 = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.label_7.setMaximumSize(QtCore.QSize(16777215, 15))
+        self.label_7.setObjectName("label_7")
+        self.dailyContainer_4.addWidget(self.label_7)
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_6.setContentsMargins(4, -1, 4, -1)
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.path_btn = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.path_btn.setObjectName("path_btn")
+        self.horizontalLayout_6.addWidget(self.path_btn)
+        self.path_label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.path_label.setObjectName("path_label")
+        self.horizontalLayout_6.addWidget(self.path_label)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem)
+        self.dailyContainer_4.addLayout(self.horizontalLayout_6)
+        self.tabContainer_v.addLayout(self.dailyContainer_4)
         self.deviceContainer = QtWidgets.QHBoxLayout()
         self.deviceContainer.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         self.deviceContainer.setObjectName("deviceContainer")
-        self.comboBox = QtWidgets.QComboBox(self.verticalLayoutWidget)
-        self.comboBox.setObjectName("comboBox")
-        self.deviceContainer.addWidget(self.comboBox)
+        self.device_box = QtWidgets.QComboBox(self.verticalLayoutWidget)
+        self.device_box.setObjectName("device_box")
+        self.deviceContainer.addWidget(self.device_box)
         self.stateLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.stateLabel.setText("")
         self.stateLabel.setPixmap(QtGui.QPixmap("C:/Users/raosong/Downloads/led_green.png"))
         self.stateLabel.setObjectName("stateLabel")
         self.deviceContainer.addWidget(self.stateLabel)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.deviceContainer.addItem(spacerItem)
+        self.shake_btn = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.shake_btn.setObjectName("shake_btn")
+        self.deviceContainer.addWidget(self.shake_btn)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.deviceContainer.addItem(spacerItem1)
         self.tabContainer_v.addLayout(self.deviceContainer)
         self.dailyContainer = QtWidgets.QVBoxLayout()
         self.dailyContainer.setContentsMargins(4, 4, 4, 4)
@@ -65,8 +86,8 @@ class Ui_Form(object):
         self.zhuogui_cb = QtWidgets.QCheckBox(self.verticalLayoutWidget)
         self.zhuogui_cb.setObjectName("zhuogui_cb")
         self.horizontalLayout_3.addWidget(self.zhuogui_cb)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem1)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem2)
         self.dailyContainer.addLayout(self.horizontalLayout_3)
         self.tabContainer_v.addLayout(self.dailyContainer)
         self.dailyContainer_2 = QtWidgets.QVBoxLayout()
@@ -85,25 +106,42 @@ class Ui_Form(object):
         self.accept_cb = QtWidgets.QCheckBox(self.verticalLayoutWidget)
         self.accept_cb.setObjectName("accept_cb")
         self.horizontalLayout_4.addWidget(self.accept_cb)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem2)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem3)
         self.start_btn = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.start_btn.setObjectName("start_btn")
         self.horizontalLayout_4.addWidget(self.start_btn)
         self.dailyContainer_2.addLayout(self.horizontalLayout_4)
         self.tabContainer_v.addLayout(self.dailyContainer_2)
+        self.dailyContainer_3 = QtWidgets.QVBoxLayout()
+        self.dailyContainer_3.setContentsMargins(4, 4, 4, 4)
+        self.dailyContainer_3.setObjectName("dailyContainer_3")
+        self.label_6 = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.label_6.setMaximumSize(QtCore.QSize(16777215, 15))
+        self.label_6.setObjectName("label_6")
+        self.dailyContainer_3.addWidget(self.label_6)
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_5.setContentsMargins(4, -1, 4, -1)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.auto_jixian_btn = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.auto_jixian_btn.setObjectName("auto_jixian_btn")
+        self.horizontalLayout_5.addWidget(self.auto_jixian_btn)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem4)
+        self.dailyContainer_3.addLayout(self.horizontalLayout_5)
+        self.tabContainer_v.addLayout(self.dailyContainer_3)
         self.logcontainer = QtWidgets.QVBoxLayout()
         self.logcontainer.setContentsMargins(4, 4, 4, 4)
         self.logcontainer.setObjectName("logcontainer")
         self.label_4 = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.label_4.setObjectName("label_4")
         self.logcontainer.addWidget(self.label_4)
-        self.plainTextEdit = QtWidgets.QPlainTextEdit(self.verticalLayoutWidget)
-        self.plainTextEdit.setObjectName("plainTextEdit")
-        self.logcontainer.addWidget(self.plainTextEdit)
+        self.log_text = QtWidgets.QPlainTextEdit(self.verticalLayoutWidget)
+        self.log_text.setObjectName("log_text")
+        self.logcontainer.addWidget(self.log_text)
         self.tabContainer_v.addLayout(self.logcontainer)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.tabContainer_v.addItem(spacerItem3)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.tabContainer_v.addItem(spacerItem5)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -111,6 +149,10 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
+        self.label_7.setText(_translate("Form", "第一步"))
+        self.path_btn.setText(_translate("Form", "雷电路径"))
+        self.path_label.setText(_translate("Form", "："))
+        self.shake_btn.setText(_translate("Form", "摇一下验证"))
         self.label_3.setText(_translate("Form", "日常"))
         self.shimen_cb.setText(_translate("Form", "师门"))
         self.baotu_cb.setText(_translate("Form", "宝图"))
@@ -122,5 +164,26 @@ class Ui_Form(object):
         self.duizhang_cb.setText(_translate("Form", "任命队长"))
         self.accept_cb.setText(_translate("Form", "接受任何人组队"))
         self.start_btn.setText(_translate("Form", "start"))
+        self.label_6.setText(_translate("Form", "工具"))
+        self.auto_jixian_btn.setText(_translate("Form", "自动挤线"))
         self.label_4.setText(_translate("Form", "log"))
-        self.plainTextEdit.setPlainText(_translate("Form", common.commonString.log_example))
+        self.log_text.setPlainText(_translate("Form", "1.我从没觉得孤独，说的浪漫些，我完全自由\n"
+"2.夕阳总会落在你身上，你也会快乐一场。\n"
+"3.路过全世界，只为走向你。\n"
+"4.于千万人中获你惊鸿，从此连生命也愿笑奉。\n"
+"5.深情若是一桩悲剧，必定以死来句读\n"
+"6.直到遇见你那一刻 我的星河才亮了起来.\n"
+"7.简单的喜欢最长远 懂你的人最温柔\n"
+"8.希望你的心情能像星星一样， 常年闪闪发亮，偶尔躲躲乌云。\n"
+"9.向着月亮出发，即使不能到达，也能站在群星之中。\n"
+"10.这份喜欢，迫在眉睫，阁下，你接好。\n"
+"11.原来躲起来的星星也在努力发光啊。\n"
+"12.也许，大海给贝壳下的定义是珍珠，也许时间给煤炭下的定义是钻石。\n"
+"13.我们各自努力，最高处见。\n"
+"14.猫咪在落叶里打滚儿，晚霞铺满天空，风把思念吹向你，我贪恋的人间不过是你而已。\n"
+"15.你眼中的春和秋，胜过我见过的，爱过的一切山川与河流。\n"
+"16.私心是希望你能陪我久一点.\n"
+"17.我摘的果子，已酿成酒，只等你来添香解愁。\n"
+"18.想用每日的温柔和月亮 换取一束光 最后将它化作星河 万倾赠与你.\n"
+"19.风止于秋水，我止于你。\n"
+"20.我想要的很简单：兜里有糖，肚里有墨，手里有活，卡里有钱，未来有你。"))

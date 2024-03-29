@@ -16,6 +16,7 @@ class AdbClient(object):
     def __init__(self, save_path=None, file_name=None):
         self.save_path = save_path
         self.file_name = file_name
+        # self.devices = self.get_connected_devices()
 
     def get_connected_devices(self):
         try:
@@ -75,8 +76,6 @@ class AdbClient(object):
 
         if not os.path.exists(pull_path):
             os.makedirs(pull_path, exist_ok=True)
-        # pull_png = r"adb -s {} pull /sdcard/{}.png {}  >> log1.txt".format(device_name, img_name, pull_path)
-        # run(pull_png, shell=True)
         self.pull_file(device_name, "/sdcard/{}.png".format(img_name), pull_path)
 
         #清除冗余数据
@@ -87,13 +86,8 @@ class AdbClient(object):
         delete_png = r"adb -s {} shell rm /sdcard/{}.png ".format(device_name, img_name)
         run(delete_png, shell=True)
 
-
     def screen_record(self, device_name=None):
-        """
-        时间戳命名
-        关掉cmd命令窗口，即可保存视频
-        需要传一个保存视频路径
-        """
+        # 时间戳命名 # 关掉cmd命令窗口，即可保存视频 # 需要传一个保存视频路径
         t = time_stamp()
         record = r"adb -s {} shell screenrecord /sdcard/{}.mp4".format(device_name, t)
         os.system(record)
@@ -108,7 +102,7 @@ class AdbClient(object):
         关掉cmd命令窗口，即可保存日志
         需要传一个保存日志路径及其名称 例:D:\log\crash.log
         """
-        log = r"adb -s {} logcat > {}".format(device_name, self.file_name)
+        log = r"adb -s {} logcat > {}".format(device_name, log_path)
         os.system(log)
 
     def pull_file(self, device_name, device_path, pull_path):
@@ -128,6 +122,10 @@ class AdbClient(object):
     def cmd(self, cmdStr):
         run(cmdStr, shell=True)
 
+
+    def tap(self, device_name, x, y):
+        tap = r"adb -s {} shell input tap {} {}".format(device_name, x, y)
+        self.cmd(tap)
 
 if __name__ == '__main__':
 

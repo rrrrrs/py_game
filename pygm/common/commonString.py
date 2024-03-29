@@ -1,5 +1,5 @@
 log_path = "C:\\Users\\raosong\\Desktop\\imgs\\log\\log.txt"
-
+cmd_path = ""
 log_example = "2024-03-26 10:08:20: 开启雷电模拟器rrr \n\
 2024-03-26 10:08:20: 检查模拟器是否启动 \n\
 2024-03-26 10:08:20: 开始 \n\

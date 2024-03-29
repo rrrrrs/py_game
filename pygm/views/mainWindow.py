@@ -47,7 +47,7 @@ class Ui_MainWindow(QMainWindow):
         # self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1), _translate("MainWindow", "Tab 1"))
         # self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), _translate("MainWindow", "Tab 2"))
 
-        self.helper1 = TabHelper(self.content1)
+        self.helper1 = TabHelper(self.content1, self)
 
 
 if __name__ == "__main__":

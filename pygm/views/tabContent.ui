@@ -36,12 +36,78 @@
      <number>4</number>
     </property>
     <item>
+     <layout class="QVBoxLayout" name="dailyContainer_4">
+      <property name="leftMargin">
+       <number>4</number>
+      </property>
+      <property name="topMargin">
+       <number>4</number>
+      </property>
+      <property name="rightMargin">
+       <number>4</number>
+      </property>
+      <property name="bottomMargin">
+       <number>4</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_7">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>第一步</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <property name="leftMargin">
+         <number>4</number>
+        </property>
+        <property name="rightMargin">
+         <number>4</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="path_btn">
+          <property name="text">
+           <string>雷电路径</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="path_label">
+          <property name="text">
+           <string>：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="spacer_h3_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="deviceContainer">
       <property name="sizeConstraint">
        <enum>QLayout::SetMinimumSize</enum>
       </property>
       <item>
-       <widget class="QComboBox" name="comboBox"/>
+       <widget class="QComboBox" name="device_box"/>
       </item>
       <item>
        <widget class="QLabel" name="stateLabel">
@@ -50,6 +116,13 @@
         </property>
         <property name="pixmap">
          <pixmap>C:/Users/raosong/Downloads/led_green.png</pixmap>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="shake_btn">
+        <property name="text">
+         <string>摇一下验证</string>
         </property>
        </widget>
       </item>
@@ -236,6 +309,79 @@
      </layout>
     </item>
     <item>
+     <layout class="QVBoxLayout" name="dailyContainer_3">
+      <property name="leftMargin">
+       <number>4</number>
+      </property>
+      <property name="topMargin">
+       <number>4</number>
+      </property>
+      <property name="rightMargin">
+       <number>4</number>
+      </property>
+      <property name="bottomMargin">
+       <number>4</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>工具</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <property name="leftMargin">
+         <number>4</number>
+        </property>
+        <property name="rightMargin">
+         <number>4</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="auto_jixian_btn">
+          <property name="text">
+           <string>自动挤线</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="auto_jixian_btn_2">
+          <property name="text">
+           <string>自动挤线</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="auto_jixian_btn_3">
+          <property name="text">
+           <string>自动挤线</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
      <layout class="QVBoxLayout" name="logcontainer">
       <property name="leftMargin">
        <number>4</number>
@@ -257,7 +403,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPlainTextEdit" name="plainTextEdit">
+       <widget class="QPlainTextEdit" name="log_text">
         <property name="plainText">
          <string>1.我从没觉得孤独，说的浪漫些，我完全自由
 2.夕阳总会落在你身上，你也会快乐一场。

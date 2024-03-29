@@ -3,10 +3,10 @@
 
 block_cipher = None
 
-added_files = [('D:/demoRepo/python/test1/ui', 'pyecharts' )]
-
-a = Analysis(['main.py'],
-             pathex=[D:\demoRepo\python\py_game\pygm],
+#added_files = [('D:/demoRepo/python/test1/ui', 'pyecharts' )]
+added_files = []
+a = Analysis(['main.py', 'views/mainWindow.py', 'views/tabContent.py', 'module/adbClient.py', 'module/leidianDevice.py', 'module/textOCR.py', 'helpers/tabHelper.py', 'common/commonString.py'],
+             pathex=['D:\demoRepo\python\py_game\pygm'],
              binaries=[],
              datas=added_files,
              hiddenimports=[],
@@ -18,6 +18,7 @@ a = Analysis(['main.py'],
              win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
+
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 
@@ -27,7 +28,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='my_s',
+          name='my_',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
@@ -38,4 +39,5 @@ exe = EXE(pyz,
           disable_windowed_traceback=False,
           target_arch=None,
           codesign_identity=None,
-          entitlements_file=None )
+          entitlements_file=None,
+          icon='icon.ico')

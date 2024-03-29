@@ -1,5 +1,5 @@
-import ddddocr
 import cv2
+import ddddocr
 
 class TEXT_TYPE():
     GOLD = 1
@@ -8,8 +8,8 @@ class TEXT_TYPE():
 
 def get_num(img_path, type):
     if type == 1:
-        xy_0 = (138, 133)
-        xy_1 = (260, 167)
+        xy_0 = (620, 360)
+        xy_1 = (960, 390)
 
     img = cv2.imread(img_path)
     if img is None:
@@ -24,8 +24,8 @@ def get_num(img_path, type):
         img_byte = f.read()
 
     res = ocr.classification(img_byte)
-    print(res)
+    return res
 
 
-if __name__ == '__main__' :
-    get_num('../asset/test2.png', TEXT_TYPE.GOLD)
+if __name__ == '__main__':
+    get_num('../asset/test_login.png', TEXT_TYPE.GOLD)
