@@ -15,6 +15,9 @@ def get_cmd_path():
 def set_cmd_path(cmd):
     common.commonString.cmd_path = cmd+"/ldconsole.exe"
     print("重新设定雷电路径" + common.commonString.cmd_path)
+def check_cmd_path(path):
+    return os.path.exists(path+"/ldconsole.exe")
+
 
 def get_all_leidian_devices():
     # 获取所有雷电模拟器
@@ -99,7 +102,6 @@ def shake(hwnd):
     pyautogui.keyDown('6')
     pyautogui.keyUp('6')
     pyautogui.keyUp('ctrl')
-
 
 if __name__ == '__main__':
     res = get_all_leidian_devices()

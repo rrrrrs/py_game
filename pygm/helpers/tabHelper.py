@@ -4,7 +4,7 @@ from threading import Thread
 from PyQt5.QtWidgets import QFileDialog
 from module import leidianDevice
 from module import textOCR
-
+from tkinter import messagebox
 class TabHelper(object):
     def __init__(self, widget=None, window=None):
         self.widget = widget
@@ -48,6 +48,11 @@ class TabHelper(object):
 
         # checkbox
         self.widget.shimen_cb.stateChanged.connect(lambda: self.checkboxStateCallback(self.widget.shimen_cb))
+        self.widget.baotu_cb.stateChanged.connect(lambda: self.checkboxStateCallback(self.widget.baotu_cb))
+        self.widget.mijing_cb.stateChanged.connect(lambda: self.checkboxStateCallback(self.widget.mijing_cb))
+        self.widget.yunbiao_cb.stateChanged.connect(lambda: self.checkboxStateCallback(self.widget.yunbiao_cb))
+        self.widget.fuben_cb.stateChanged.connect(lambda: self.checkboxStateCallback(self.widget.fuben_cb))
+        self.widget.zhuogui_cb.stateChanged.connect(lambda: self.checkboxStateCallback(self.widget.zhuogui_cb))
 
         # self.widget.device_box.clear()
         # self.widget.device_box.addItems(self.drop_items)
@@ -115,16 +120,20 @@ class TabHelper(object):
 
     def path_action(self):
         filepath = QFileDialog.getExistingDirectory(self.window, "选雷电路径")
-        if filepath is not None:
+        if filepath is not None and leidianDevice.check_cmd_path(filepath):
             leidianDevice.set_cmd_path(filepath)
             self.read_devices()
             self.widget.path_label.setText(filepath)
             self.widget.log_text.appendPlainText("需要读取的路径为:" + filepath)
+        else:
+            messagebox.showerror('错误', '雷电路径错误')
+            print('雷电路径错误')
 
     def shake_action(self):
         if self.device['hwnd'] != 0:
             leidianDevice.shake(self.device['hwnd'])
-
+        else:
+            messagebox.showerror('错误', '模拟器未启动')
     def device_selected(self, i):
         if i >= len(self.devices) or i < 0:
             logging.debug('无设备')
