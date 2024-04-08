@@ -25,13 +25,13 @@ def get_all_leidian_devices():
         # 运行adb命令并捕获输出
         cmd_path = get_cmd_path()
         print('run command:{} {}'.format(cmd_path, 'list2'))
-        output = subprocess.check_output([cmd_path, 'list2'])
+        output = subprocess.check_output([cmd_path, 'list2'], encoding='GBK')
         print(output)
         if output is None:
             print("未获取到雷电设备")
             return []
-        output = output.decode()
-        print("获取到雷电设备："+output)
+        # output = output.decode()
+        # print("获取到雷电设备："+output)
 
         # 解析输出
         data = []
