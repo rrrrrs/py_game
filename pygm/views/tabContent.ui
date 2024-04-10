@@ -351,14 +351,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="auto_jixian_btn_2">
+         <widget class="QPushButton" name="tool_btn_2">
           <property name="text">
            <string>自动挤线</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="auto_jixian_btn_3">
+         <widget class="QPushButton" name="tool_btn_3">
           <property name="text">
            <string>自动挤线</string>
           </property>

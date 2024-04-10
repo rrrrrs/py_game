@@ -126,6 +126,12 @@ class Ui_Form(object):
         self.auto_jixian_btn = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.auto_jixian_btn.setObjectName("auto_jixian_btn")
         self.horizontalLayout_5.addWidget(self.auto_jixian_btn)
+        self.tool_btn_2 = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.tool_btn_2.setObjectName("tool_btn_2")
+        self.horizontalLayout_5.addWidget(self.tool_btn_2)
+        self.tool_btn_3 = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.tool_btn_3.setObjectName("tool_btn_3")
+        self.horizontalLayout_5.addWidget(self.tool_btn_3)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem4)
         self.dailyContainer_3.addLayout(self.horizontalLayout_5)
@@ -166,6 +172,8 @@ class Ui_Form(object):
         self.start_btn.setText(_translate("Form", "start"))
         self.label_6.setText(_translate("Form", "工具"))
         self.auto_jixian_btn.setText(_translate("Form", "自动挤线"))
+        self.tool_btn_2.setText(_translate("Form", "自动挤线"))
+        self.tool_btn_3.setText(_translate("Form", "自动挤线"))
         self.label_4.setText(_translate("Form", "log"))
         self.log_text.setPlainText(_translate("Form", "1.我从没觉得孤独，说的浪漫些，我完全自由\n"
 "2.夕阳总会落在你身上，你也会快乐一场。\n"
