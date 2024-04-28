@@ -353,7 +353,7 @@
         <item>
          <widget class="QPushButton" name="tool_btn_2">
           <property name="text">
-           <string>自动挤线</string>
+           <string>截图</string>
           </property>
          </widget>
         </item>
