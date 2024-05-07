@@ -173,7 +173,7 @@ class Ui_Form(object):
         self.label_6.setText(_translate("Form", "工具"))
         self.auto_jixian_btn.setText(_translate("Form", "自动挤线"))
         self.tool_btn_2.setText(_translate("Form", "自动挤线"))
-        self.tool_btn_3.setText(_translate("Form", "自动挤线"))
+        self.tool_btn_3.setText(_translate("Form", "副本"))
         self.label_4.setText(_translate("Form", "log"))
         self.log_text.setPlainText(_translate("Form", "1.我从没觉得孤独，说的浪漫些，我完全自由\n"
 "2.夕阳总会落在你身上，你也会快乐一场。\n"
