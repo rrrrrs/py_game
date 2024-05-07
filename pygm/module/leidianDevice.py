@@ -8,9 +8,11 @@ import pyautogui
 
 import common.commonString
 
-
+dir_path = 'C:\\Users\\wangh\\Desktop\\screencap\\data'
 def get_cmd_path():
-    # cmd_path = "D:\\tools\\leidian\\LDPlayer9\\ldconsole.exe"
+    if  common.commonString.cmd_path == "" or common.commonString.cmd_path is None:
+        cmd_path = "D:\\app\\LDPlayer9\\ldconsole.exe"
+        return cmd_path
     return common.commonString.cmd_path
 def set_cmd_path(cmd):
     common.commonString.cmd_path = cmd+"/ldconsole.exe"
@@ -58,14 +60,23 @@ def open_leidian_device(name):
         # 如果出现错误，返回空列表
         return []
 
-def get_current_pic(device_name):
+def get_current_pic_path(device_name):
     # 截图。当前
     cmd_path = get_cmd_path()
     fp = "/sdcard/current_0.png"
     cap_str = "{} adb --name {} --command \"shell screencap -p {} \" ".format(cmd_path, device_name, fp)
     subprocess.run(cap_str)
-    pull(device_name, '/sdcard/current_0.png', "./")
-    return "./current_0.png"
+    loc_path = "{}\\current_0.png".format(dir_path)
+    pull(device_name, '/sdcard/current_0.png', loc_path)
+    return loc_path
+
+def save_current_pic_to(path, device_name):
+    cmd_path = get_cmd_path()
+    fp = "/sdcard/current_0.png"
+    cap_str = "{} adb --name {} --command \"shell screencap -p {} \" ".format(cmd_path, device_name, fp)
+    subprocess.run(cap_str)
+    r = random.randint(1000000, 99999999)
+    pull(device_name, '/sdcard/current_0.png', "C:\\Users\\wangh\\Desktop\\screencap\\source\\{}.png".format(r))
 
 
 def pull(device_name, file_path, loc_path):

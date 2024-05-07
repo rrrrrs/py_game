@@ -2,7 +2,7 @@ import logging
 import time
 from threading import Thread
 from PyQt5.QtWidgets import QFileDialog
-from module import leidianDevice
+from module import leidianDevice, image_recog
 from module import textOCR
 from tkinter import messagebox
 class TabHelper(object):
@@ -17,6 +17,7 @@ class TabHelper(object):
         self.auto_jixian_count = 0
         self.auto_jiaxian_switch = False
         self.auto_jixian_t = None
+        self.auto_fuben_t = None
 
 
     def read_devices(self):
@@ -66,12 +67,16 @@ class TabHelper(object):
 
         # 工具
         self.widget.auto_jixian_btn.clicked.connect(self.auto_jixian_action)
-
+        self.widget.tool_btn_2.clicked.connect(self.cap_current_screen)
+        self.widget.tool_btn_3.clicked.connect(self.auto_fuben_action)
     def checkboxStateCallback(self, cb):
         if cb.isChecked():
             print("{} has been checked".format(cb.text()))
         else:
             print("{} has been unchecked".format(cb.text()))
+
+    def cap_current_screen(self):
+        leidianDevice.save_current_pic_to(None, self.device['name'])
 
     def run_auto_jixian_thread(self, device_name):
         while 1:
@@ -114,6 +119,47 @@ class TabHelper(object):
         # 是否正在自动点击
         if self.auto_jixian_count != 0:
             self.auto_jiaxian_switch = not self.auto_jiaxian_switch
+
+    def run_auto_fuben_thread(self, device_name):
+        while True:
+            path = leidianDevice.get_current_pic_path(device_name)
+            res_img, mid_x, mid_y = image_recog.get_target_point(path, image_recog.fuben_dialog_complete_path, 0.8)
+            if res_img is not None:
+                print("当前副本完成！")
+                leidianDevice.tap(device_name, mid_x, mid_y)
+                time.sleep(5)
+                continue
+
+            res_img, mid_x, mid_y = image_recog.get_target_point(path, image_recog.fuben_dialog_next_path, 0.8)
+            if res_img is not None:
+                print("找到对话框下一步")
+                leidianDevice.tap(device_name, mid_x, mid_y+80)
+                time.sleep(5)
+                continue
+
+            res_img, mid_x, mid_y = image_recog.get_target_point(path, image_recog.fuben_dialog_tiaoguo_path, 0.8)
+            if res_img is not None:
+                print("找到跳过副本按钮")
+                leidianDevice.tap(device_name, mid_x, mid_y)
+                time.sleep(5)
+                continue
+
+            res_img, mid_x, mid_y = image_recog.get_target_point(path, image_recog.fuben_dialog_fighting_path, 0.8)
+            if res_img is not None:
+                print("找到直接战斗按钮")
+                leidianDevice.tap(device_name, mid_x, mid_y)
+                time.sleep(5)
+                continue
+
+            time.sleep(10)
+
+
+    def auto_fuben_action(self):
+        # 是否创建线程
+        if self.auto_fuben_t is None:
+            self.auto_fuben_t = Thread(target=self.run_auto_fuben_thread, args=[self.device['name']])
+            # self.auto_jiaxian_switch = True
+            self.auto_fuben_t.start()
 
     def startBtnClicked(self):
         print("startBtnClicked")
