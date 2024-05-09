@@ -8,8 +8,8 @@ class TEXT_TYPE():
 
 def get_num(img_path, type):
     if type == 1:
-        xy_0 = (620, 360)
-        xy_1 = (960, 390)
+        xy_0 = (123, 180)
+        xy_1 = (214, 218)
 
     img = cv2.imread(img_path)
     if img is None:

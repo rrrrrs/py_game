@@ -8,10 +8,10 @@ import pyautogui
 
 import common.commonString
 
-dir_path = 'C:\\Users\\wangh\\Desktop\\screencap\\data'
+dir_path = 'C:\\Users\\raosong\\Desktop\\screencap\\data'
 def get_cmd_path():
     if  common.commonString.cmd_path == "" or common.commonString.cmd_path is None:
-        cmd_path = "D:\\app\\LDPlayer9\\ldconsole.exe"
+        cmd_path = "D:\\leidian\\LDPlayer64\\ldconsole.exe"
         return cmd_path
     return common.commonString.cmd_path
 def set_cmd_path(cmd):

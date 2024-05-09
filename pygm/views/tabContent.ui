@@ -360,7 +360,14 @@
         <item>
          <widget class="QPushButton" name="tool_btn_3">
           <property name="text">
-           <string>副本</string>
+           <string>自动副本</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="tool_btn_4">
+          <property name="text">
+           <string>记录当前金币</string>
           </property>
          </widget>
         </item>
