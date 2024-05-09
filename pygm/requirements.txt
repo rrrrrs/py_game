@@ -1,0 +1,7 @@
+adbutils==2.2.3
+pycryptodome
+xmltodict
+aiofiles
+vobject
+pytesseract
+protobuf

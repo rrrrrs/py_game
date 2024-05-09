@@ -15,7 +15,6 @@ class Auto_copy_Thread(Thread):
         self.running = False
     def run(self):
         while self.running:
-            print("running")
 
             is_xia = True if (self.copy_dif_idx > 0) else False
             str1 = "侠士" if (self.copy_dif_idx > 0) else "普通本"
@@ -26,17 +25,13 @@ class Auto_copy_Thread(Thread):
                 print("所有副本结束")
                 break
 
-            if self.copy_dif_idx < 1:
-                print("难度副本结束")
-            elif self.copy_dif_idx >= 1:
+            # 侠士优先
+            if self.copy_dif_idx >= 1:
                 self.copy_dif_idx -= 1
             else:
                 self.copy_nor_idx -= 1
 
-            if is_xia:
-                self.auto_choose_copy(True, self.copy_dif_idx)
-            else:
-                self.auto_choose_copy(False, self.copy_nor_idx)
+            self.auto_choose_copy(is_xia, self.copy_dif_idx if is_xia else self.copy_nor_idx)
 
     def auto_choose_copy(self, is_xia, index):
         """
@@ -81,13 +76,44 @@ class Auto_copy_Thread(Thread):
         elif index == 3:
             leidianDevice.tap(self.dev_name, 30, 10)
 
-        print("副本选择完成，开始等待副本任务")
+        print("副本选择完成，开始等待副本任务完成")
+        self.auto_copy_thread()
 
 
     def auto_copy_thread(self):
         # 开始自动副本了
         while self.running:
-            time.sleep(1)
+            path = leidianDevice.get_current_pic_path(self.dev_name)
+            res_img, mid_x, mid_y = image_recog.get_target_point(path, image_recog.fuben_dialog_complete_path, 0.8)
+            if res_img is not None:
+                print("当前副本完成！")
+                leidianDevice.tap(self.dev_name, mid_x, mid_y)
+                time.sleep(5)
+                break
+
+            res_img, mid_x, mid_y = image_recog.get_target_point(path, image_recog.fuben_dialog_next_path, 0.8)
+            if res_img is not None:
+                print("找到对话框下一步")
+                leidianDevice.tap(self.dev_name, mid_x, mid_y+80)
+                time.sleep(5)
+                continue
+
+            res_img, mid_x, mid_y = image_recog.get_target_point(path, image_recog.fuben_dialog_tiaoguo_path, 0.8)
+            if res_img is not None:
+                print("找到跳过副本按钮")
+                leidianDevice.tap(self.dev_name, mid_x, mid_y)
+                time.sleep(5)
+                continue
+
+            res_img, mid_x, mid_y = image_recog.get_target_point(path, image_recog.fuben_dialog_fighting_path, 0.8)
+            if res_img is not None:
+                print("找到直接战斗按钮")
+                leidianDevice.tap(self.dev_name, mid_x, mid_y)
+                time.sleep(5)
+                continue
+
+            print("副本任务时，啥都没找到，开始清除弹窗")
+            print("对比人物属性，宠物属性，助战弹窗..")
 
 
 
