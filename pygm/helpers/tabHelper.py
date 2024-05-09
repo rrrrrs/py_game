@@ -2,6 +2,8 @@ import logging
 import time
 from threading import Thread
 from PyQt5.QtWidgets import QFileDialog
+
+from Task import auto_copy_thread
 from module import leidianDevice, image_recog
 from module import textOCR
 from tkinter import messagebox
@@ -155,11 +157,13 @@ class TabHelper(object):
 
 
     def auto_fuben_action(self):
+        dev_name = self.device['name']
+        auto_copy_thread.Auto_copy_Thread(dev_name).start()
         # 是否创建线程
-        if self.auto_fuben_t is None:
-            self.auto_fuben_t = Thread(target=self.run_auto_fuben_thread, args=[self.device['name']])
-            # self.auto_jiaxian_switch = True
-            self.auto_fuben_t.start()
+        # if self.auto_fuben_t is None:
+        #     self.auto_fuben_t = Thread(target=self.run_auto_fuben_thread, args=[self.device['name']])
+        #     # self.auto_jiaxian_switch = True
+        #     self.auto_fuben_t.start()
 
     def startBtnClicked(self):
         print("startBtnClicked")
