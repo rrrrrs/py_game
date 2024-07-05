@@ -10,10 +10,9 @@ import common.commonString
 
 dir_path = 'C:\\Users\\raosong\\Desktop\\screencap\\data'
 def get_cmd_path():
-    if  common.commonString.cmd_path == "" or common.commonString.cmd_path is None:
-        cmd_path = "D:\\leidian\\LDPlayer64\\ldconsole.exe"
-        return cmd_path
-    return common.commonString.cmd_path
+    ini_path = os.path.join(os.getcwd(), 'user', 'config.ini')
+
+
 def set_cmd_path(cmd):
     common.commonString.cmd_path = cmd+"/ldconsole.exe"
     print("重新设定雷电路径" + common.commonString.cmd_path)

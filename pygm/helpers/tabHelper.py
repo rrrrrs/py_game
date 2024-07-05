@@ -1,4 +1,6 @@
+import configparser
 import logging
+import os
 import time
 from threading import Thread
 from PyQt5.QtWidgets import QFileDialog
@@ -16,10 +18,22 @@ class TabHelper(object):
         self.device = None
         # self.read_devices()
         self.setTab()
-        self.auto_jixian_count = 0
-        self.auto_jiaxian_switch = False
-        self.auto_jixian_t = None
         self.auto_fuben_t = None
+        self.config_path = os.path.join(os.getcwd(), 'user', 'config.ini')
+        self.config = configparser.ConfigParser()
+        self.init_config()
+
+    def init_config(self):
+        # 初始化配置文件
+        target_dir = os.path.dirname(self.config_path)
+        if not os.path.exists(target_dir):
+            os.makedirs(target_dir)
+        if not os.path.exists(self.config_path):
+            with open(self.config_path, 'w') as new_file:
+                new_file.write('[DEFAULT] \nServerAliveInterval = 45\nCompression = yes\nCompressionLevel = 9\nForwardX11 = yes\n')
+                self.config.read(self.config_path)
+                # self.config['DEFAULT']['Adb_path'] = 'D:\\tools\\leidian\\ldmutiplayer\\'
+        # print(self.config['DEFAULT']['Adb_path'])
 
 
     def read_devices(self):
@@ -48,7 +62,6 @@ class TabHelper(object):
         # btn
         self.widget.start_btn.clicked.connect(self.startBtnClicked)
 
-
         # checkbox
         self.widget.shimen_cb.stateChanged.connect(lambda: self.checkboxStateCallback(self.widget.shimen_cb))
         self.widget.baotu_cb.stateChanged.connect(lambda: self.checkboxStateCallback(self.widget.baotu_cb))
@@ -68,9 +81,9 @@ class TabHelper(object):
         self.widget.shake_btn.clicked.connect(self.shake_action)
 
         # 工具
-        self.widget.auto_jixian_btn.clicked.connect(self.auto_jixian_action)
         self.widget.tool_btn_2.clicked.connect(self.cap_current_screen)
         self.widget.tool_btn_3.clicked.connect(self.auto_fuben_action)
+
     def checkboxStateCallback(self, cb):
         if cb.isChecked():
             print("{} has been checked".format(cb.text()))
@@ -80,90 +93,14 @@ class TabHelper(object):
     def cap_current_screen(self):
         leidianDevice.save_current_pic_to(None, self.device['name'])
 
-    def run_auto_jixian_thread(self, device_name):
-        while 1:
-            if self.auto_jiaxian_switch:
-                self.auto_jixian_count += 1
-                # 1.选角色1
-                leidianDevice.tap(device_name, 640, 460)
-                # leidianDevice.tap(device_name, 950, 460)
-                # leidianDevice.tap(device_name, 1260, 460)
-
-                # 2.判断
-                path = leidianDevice.get_current_pic(device_name)
-                text = textOCR.get_num(path, 1)
-                print("当前排队状态为："+text)
-
-                if "人数已满" in text:
-                    print("进入排队失败，取消排队， 次数={}".format(self.auto_jixian_count))
-                    # 2.1退出排队
-                    leidianDevice.tap(device_name, 805, 620)
-                    time.sleep(0.1)
-                    # 2.2 去人退出排队
-                    leidianDevice.tap(device_name, 920, 500)
-                    time.sleep(0.1)
-                elif "排队中" in text:
-                    print("成功进入排队, 关闭自动挤线")
-                    self.auto_jiaxian_switch = False
-                else:
-                    print("已不在排队，取消自动挤线")
-                    self.auto_jiaxian_switch = False
-
-            time.sleep(0.5)
-
-    def auto_jixian_action(self):
-        # 是否创建线程
-        if self.auto_jixian_t is None:
-            self.auto_jixian_t = Thread(target=self.run_auto_jixian_thread, args=[self.device['name']])
-            self.auto_jiaxian_switch = True
-            self.auto_jixian_t.start()
-
-        # 是否正在自动点击
-        if self.auto_jixian_count != 0:
-            self.auto_jiaxian_switch = not self.auto_jiaxian_switch
-
-    def run_auto_fuben_thread(self, device_name):
-        while True:
-            path = leidianDevice.get_current_pic_path(device_name)
-            res_img, mid_x, mid_y = image_recog.get_target_point(path, image_recog.fuben_dialog_complete_path, 0.8)
-            if res_img is not None:
-                print("当前副本完成！")
-                leidianDevice.tap(device_name, mid_x, mid_y)
-                time.sleep(5)
-                continue
-
-            res_img, mid_x, mid_y = image_recog.get_target_point(path, image_recog.fuben_dialog_next_path, 0.8)
-            if res_img is not None:
-                print("找到对话框下一步")
-                leidianDevice.tap(device_name, mid_x, mid_y+80)
-                time.sleep(5)
-                continue
-
-            res_img, mid_x, mid_y = image_recog.get_target_point(path, image_recog.fuben_dialog_tiaoguo_path, 0.8)
-            if res_img is not None:
-                print("找到跳过副本按钮")
-                leidianDevice.tap(device_name, mid_x, mid_y)
-                time.sleep(5)
-                continue
-
-            res_img, mid_x, mid_y = image_recog.get_target_point(path, image_recog.fuben_dialog_fighting_path, 0.8)
-            if res_img is not None:
-                print("找到直接战斗按钮")
-                leidianDevice.tap(device_name, mid_x, mid_y)
-                time.sleep(5)
-                continue
-
-            time.sleep(10)
-
 
     def auto_fuben_action(self):
         dev_name = self.device['name']
-        auto_copy_thread.Auto_copy_Thread(dev_name).start()
-        # 是否创建线程
-        # if self.auto_fuben_t is None:
-        #     self.auto_fuben_t = Thread(target=self.run_auto_fuben_thread, args=[self.device['name']])
-        #     # self.auto_jiaxian_switch = True
-        #     self.auto_fuben_t.start()
+        if self.auto_fuben_t is None:
+            self.auto_fuben_t = auto_copy_thread.Auto_copy_Thread(dev_name)
+            self.auto_fuben_t.start()
+        else:
+            self.auto_fuben_t.stop_thread()
 
     def startBtnClicked(self):
         print("startBtnClicked")
@@ -172,6 +109,9 @@ class TabHelper(object):
         filepath = QFileDialog.getExistingDirectory(self.window, "选雷电路径")
         if filepath is not None and leidianDevice.check_cmd_path(filepath):
             leidianDevice.set_cmd_path(filepath)
+            self.config['Default']['adb_path'] = filepath
+            with open(self.config_path, 'w') as configfile:
+                self.config.write(configfile)
             self.read_devices()
             self.widget.path_label.setText(filepath)
             self.widget.log_text.appendPlainText("需要读取的路径为:" + filepath)

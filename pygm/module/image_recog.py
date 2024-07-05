@@ -1,11 +1,12 @@
+import os.path
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-fuben_dialog_complete_path = 'D:\\code\\py_gm\\pygm\\asset\\fuben_dialog_complete.png'
-fuben_dialog_next_path = 'D:\\code\\py_gm\\pygm\\asset\\fuben_dialog_next.png'
-fuben_dialog_fighting_path = 'D:\\code\\py_gm\\pygm\\asset\\fuben_dialog_fight.png'
-fuben_dialog_tiaoguo_path = 'D:\\code\\py_gm\\pygm\\asset\\fuben_dialog_tiaoguo.png'
+fuben_dialog_complete_path = os.path.join(os.getcwd(), 'asset', 'fuben_dialog_complete.png')
+fuben_dialog_next_path = os.path.join(os.getcwd(), 'asset', 'fuben_dialog_next.png')
+fuben_dialog_fighting_path = os.path.join(os.getcwd(), 'asset', 'fuben_dialog_fight.png')
+fuben_dialog_tiaoguo_path = os.path.join(os.getcwd(), 'asset', 'fuben_dialog_tiaoguo.png')
 
 def showpic(img):
     plt.clf()
@@ -14,7 +15,6 @@ def showpic(img):
     plt.imshow(img, animated=True)
     plt.tight_layout()
     plt.show()
-
 
 
 def get_target_point(big_path, sml_path, max):
@@ -72,7 +72,7 @@ def find_template(template_path, image_path):
 
     return threshold
 
-if __name__ == '__main__' :
+if __name__ == '__main__':
     # 示例用法
     template_path = '../asset/test2.png'  # 模板图像路径
     image_path = '../asset/test3.png'        # 待搜索的图像路径
